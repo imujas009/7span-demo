@@ -176,7 +176,7 @@ class UserController extends Controller
 
         if(@$request->filter_hobby != ""){
             $data->whereHas('hobbies',function($q) use ($request) {
-                $q->where('id', @$request->filter_hobby);
+                $q->where('hobby_id', @$request->filter_hobby);
             });
         }
 
