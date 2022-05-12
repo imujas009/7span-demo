@@ -28,3 +28,8 @@ php artisan config:cache
 ```
 php artisan passport:install
 ```
+
+6. Remove all records from database and start with new details
+```
+php artisan migrate:fresh --seed
+```
