@@ -17,3 +17,24 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::namespace('App\Http\Controllers\Api')->group(function(){
+	
+	Route::post('login', 'LoginController@login');
+
+	Route::middleware('api.auth')->group(function(){
+
+		Route::middleware('api.admin')->prefix('user')->group(function(){
+			Route::get('{id}', 'UserController@show');
+			Route::post('store', 'UserController@store');
+			Route::delete('delete/{id}', 'UserController@delete');
+			Route::post('get-all', 'UserController@getAll');
+		});
+
+		Route::post('user/update-hobbies', 'UserController@updateHobbies')->middleware('api.user');
+
+		Route::post('user/get-all-hobbies', 'UserController@getAllHobbies');
+	});
+
+});
